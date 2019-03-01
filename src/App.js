@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import GameField from './pages/GameField';
+import Settings from './pages/Settings';
+import { fetchWeatherInfo } from './actions';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchWeatherInfo();
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path="/" component={this.props.weatherInfo.isLoading ? () => <p>Loading...</p> : GameField} />
+          <Route path="/settings" component={Settings} />
+        </div>
+      </Router>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ weatherInfo }) => ({
+  weatherInfo
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchWeatherInfo: () => dispatch(fetchWeatherInfo())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
