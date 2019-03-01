@@ -1,0 +1,23 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 0 20px 20px 0;
+  border: 1px solid #000;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.2s ease;
+}
+
+.game-field .card:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.card p {
+  margin: 5px 0;
+}

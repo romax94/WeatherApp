@@ -1,0 +1,137 @@
+[
+  {
+    "id": 625144,
+    "name": "Minsk",
+    "country": "BY"
+  },
+  {
+    "id": 2950159,
+    "name": "Berlin",
+    "country": "DE"
+  },
+  {
+    "id": 6455259,
+    "name": "Paris",
+    "country": "FR"
+  },
+  {
+    "id": 1689973,
+    "name": "San Francisco",
+    "country": "PH"
+  },
+  {
+    "id": 524901,
+    "name": "Moscow",
+    "country": "RU"
+  },
+  {
+    "id": 2800866,
+    "name": "Brussels",
+    "country": "BE"
+  },
+  {
+    "id": 2267057,
+    "name": "Lisbon",
+    "country": "PT"
+  },
+  {
+    "id": 6695624,
+    "name": "Warszawa",
+    "country": "PL"
+  },
+  {
+    "id": 6542283,
+    "name": "Milan",
+    "country": "IT"
+  },
+  {
+    "id": 5809844,
+    "name": "Seattle",
+    "country": "US"
+  },
+  {
+    "id": 5332921,
+    "name": "California",
+    "country": "US"
+  },
+  {
+    "id": 5391811,
+    "name": "San Diego",
+    "country": "US"
+  },
+  {
+    "id": 5506956,
+    "name": "Las Vegas",
+    "country": "US"
+  },
+  {
+    "id": 293397,
+    "name": "Tel Aviv",
+    "country": "IL"
+  },
+  {
+    "id": 3054643,
+    "name": "Budapest",
+    "country": "HU"
+  },
+  {
+    "id": 1609350,
+    "name": "Bangkok",
+    "country": "TH"
+  },
+  {
+    "id": 2643743,
+    "name": "London",
+    "country": "GB"
+  },
+  {
+    "id": 292223,
+    "name": "Dubai",
+    "country": "AE"
+  },
+  {
+    "id": 1880252,
+    "name": "Singapore",
+    "country": "SG"
+  },
+  {
+    "id": 5128638,
+    "name": "New York",
+    "country": "US"
+  },
+  {
+    "id": 1733046,
+    "name": "Kuala Lumpur",
+    "country": "MY"
+  },
+  {
+    "id": 1850147,
+    "name": "Tokyo",
+    "country": "JP"
+  },
+  {
+    "id": 745044,
+    "name": "Istanbul",
+    "country": "TR"
+  },
+  {
+    "id": 1835848,
+    "name": "Seoul",
+    "country": "KR"
+  },
+  {
+    "id": 1151254,
+    "name": "Phuket",
+    "country": "TH"
+  },
+  {
+    "id": 1819729,
+    "name": "Hong Kong",
+    "country": "HK"
+  },
+  {
+    "id": 6356055,
+    "name": "Barcelona",
+    "country": "ES"
+  }
+]
