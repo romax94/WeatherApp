@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card from '../../components/Card';
+import CardItem from '../../components/CardItem';
 import { Button } from '../../components/Button';
 import { Title } from '../../components/Title';
 import cities from '../../constants/cities';
@@ -70,7 +70,7 @@ class GameField extends Component {
         <Title text={statusText} />
         <p>Score: {this.props.score}</p>
         <div className="card-list">
-          <Card
+          <CardItem
             city={firstCard.name}
             country={firstCard.country}
             id={firstCard.id}
@@ -78,7 +78,7 @@ class GameField extends Component {
             showTemp={isCardSelected}
             handleClick={this.selectCard}
           />
-          <Card
+          <CardItem
             city={secondCard.name}
             country={secondCard.country}
             id={secondCard.id}

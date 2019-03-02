@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { convertTemp } from '../../utils';
 import './style.css';
 
-const Card = ({ handleClick, city, country, id, temp, tempUnits, showTemp }) => (
+const CardItem = ({ handleClick, city, country, id, temp, tempUnits, showTemp }) => (
   <div className="card" onClick={() => handleClick && handleClick(id)}>
     <p>{city}</p>
     <p>{country}</p>
@@ -13,4 +13,4 @@ const Card = ({ handleClick, city, country, id, temp, tempUnits, showTemp }) => 
 
 const mapStateToProps = ({ tempUnits }) => ({ tempUnits });
 
-export default connect(mapStateToProps)(Card);
+export default connect(mapStateToProps)(CardItem);

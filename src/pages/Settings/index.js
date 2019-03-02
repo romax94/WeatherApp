@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Card from '../../components/Card';
+import CardItem from '../../components/CardItem';
 import { Button } from '../../components/Button';
 import { Title } from '../../components/Title';
 import { RadioButton } from '../../components/RadioButton';
@@ -38,14 +38,14 @@ const Settings = props => {
             const [firstCard, secendCard] = item.cities;
             return (
               <div key={i} className="card-list">
-                <Card
+                <CardItem
                   city={firstCard.name}
                   country={firstCard.country}
                   id={firstCard.id}
                   temp={firstCard.temp}
                   showTemp={true}
                 />
-                <Card
+                <CardItem
                   city={secendCard.name}
                   country={secendCard.country}
                   id={secendCard.id}
