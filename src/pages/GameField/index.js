@@ -1,81 +1,107 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Card } from '../../components/card';
-import { Alert } from '../../components/Alert';
-
-function createCardGenerator(cards) {
-  let nextIndex = 0;
-  let usedIndicies = new Set();
-  return () => {
-    while (usedIndicies.has(nextIndex)) {
-      nextIndex += 1;
-      if (nextIndex === cards.length) return null;
-    }
-    let firstCardIndex = nextIndex;
-    let secondCardIndex = (firstCardIndex + cards.length / 2) % cards.length;
-    usedIndicies.add(firstCardIndex);
-    usedIndicies.add(secondCardIndex);
-    return [cards[firstCardIndex], cards[secondCardIndex]];
-  };
-}
+import Card from '../../components/Card';
+import { Button } from '../../components/Button';
+import { Title } from '../../components/Title';
+import cities from '../../constants/cities';
+import { fetchWeatherInfo, addGameLogItem, incrementScore } from '../../actions';
+import './style.css';
 
 class GameField extends Component {
-  cardGenerator = createCardGenerator(this.props.weatherInfo.weatherInfo);
+  state = {};
 
-  state = {
-    currentCards: this.cardGenerator(),
-    alertText: null
+  componentDidMount() {
+    this.nextCards();
+  }
+
+  nextCards = async () => {
+    let randomIndex1 = Math.floor(Math.random() * cities.length);
+    let randomIndex2 = (randomIndex1 + 1) % cities.length;
+    let cityIds = [cities[randomIndex1].id, cities[randomIndex2].id];
+
+    await Promise.all(cityIds.map(id => this.props.fetchWeatherInfo(id)));
+
+    this.setState(prevState => ({
+      ...prevState,
+      cityIds,
+      statusText: 'Which city is hotter?',
+      isCardSelected: false
+    }));
   };
 
-  selectCard = async id => {
-    const { currentCards } = this.state;
-    const selectedCard = currentCards.findIndex(item => item.id === id);
-    const unSelectedCard = currentCards.findIndex((item, i) => i !== selectedCard);
+  selectCard = id => {
+    if (this.state.isCardSelected) return;
+
+    let { cityIds } = this.state;
+
+    let selectedCard = this.props.cityWeather.get(id);
+    let unselectedCard = this.props.cityWeather.get(id === cityIds[0] ? cityIds[1] : cityIds[0]);
+
+    let isWon = selectedCard.temp > unselectedCard.temp;
 
     this.setState(prevState => ({
       ...prevState,
-      alertText: currentCards[selectedCard].temp > currentCards[unSelectedCard].temp ? 'YES' : 'NO'
+      statusText: isWon ? 'You WON!' : 'You LOST!',
+      isCardSelected: true
     }));
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    this.props.addGameLogItem({ cityIds, isWon });
 
-    this.setState(prevState => ({
-      ...prevState,
-      currentCards: this.cardGenerator(),
-      alertText: null
-    }));
+    if (isWon) {
+      this.props.incrementScore();
+    }
+  };
+
+  redirectToSettings = () => {
+    this.props.history.push('/settings');
   };
 
   render() {
-    const [firstCard, secondCard] = this.state.currentCards;
+    let { cityIds, isCardSelected, statusText } = this.state;
+
+    if (!cityIds) return null;
+
+    let firstCard = this.props.cityWeather.get(cityIds[0]);
+    let secondCard = this.props.cityWeather.get(cityIds[1]);
+
     return (
-      <div>
-        <NavLink to="settings">Settings</NavLink>
-        <p>Which city is better?</p>
-        <p>Score: </p>
-        <div>
+      <div className="game-field">
+        <Button text="Setting" handleClick={this.redirectToSettings} />
+        <Title text={statusText} />
+        <p>Score: {this.props.score}</p>
+        <div className="card-list">
           <Card
             city={firstCard.name}
             country={firstCard.country}
             id={firstCard.id}
+            temp={firstCard.temp}
+            showTemp={isCardSelected}
             handleClick={this.selectCard}
           />
           <Card
             city={secondCard.name}
             country={secondCard.country}
             id={secondCard.id}
+            temp={secondCard.temp}
+            showTemp={isCardSelected}
             handleClick={this.selectCard}
           />
         </div>
-        {this.state.alertText && <Alert text={this.state.alertText} />}
+        {isCardSelected && <Button text="Next cities" handleClick={this.nextCards} />}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ weatherInfo }) => ({
-  weatherInfo
+const mapStateToProps = ({ cityWeather, score }) => ({ cityWeather, score });
+
+const mapDispatchToProps = dispatch => ({
+  fetchWeatherInfo: id => dispatch(fetchWeatherInfo(id)),
+  addGameLogItem: gameLogItem => dispatch(addGameLogItem(gameLogItem)),
+  incrementScore: () => dispatch(incrementScore())
 });
 
-export default connect(mapStateToProps)(GameField);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameField);

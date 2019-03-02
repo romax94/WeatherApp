@@ -1,32 +1,72 @@
 [  
   {
-    "id": 707860,
-    "name": "Hurzuf",
-    "country": "UA"
+    "id": 625144,
+    "name": "Minsk",
+    "country": "BY"
   },
   {
-    "id": 519188,
-    "name": "Novinki",
+    "id": 2950159,
+    "name": "Berlin",
+    "country": "DE"
+  },
+  {
+    "id": 6455259,
+    "name": "Paris",
+    "country": "FR"
+  },
+  {
+    "id": 1689973,
+    "name": "San Francisco",
+    "country": "PH"
+  },
+  {
+    "id": 524901,
+    "name": "Moscow",
     "country": "RU"
   },
   {
-    "id": 1283378,
-    "name": "Gorkhā",
-    "country": "NP"
+    "id": 2800866,
+    "name": "Brussels",
+    "country": "BE"
   },
   {
-    "id": 1270260,
-    "name": "State of Haryāna",
-    "country": "IN"
+    "id": 2267057,
+    "name": "Lisbon",
+    "country": "PT"
   },
   {
-    "id": 708546,
-    "name": "Holubynka",
-    "country": "UA"
+    "id": 6695624,
+    "name": "Warszawa",
+    "country": "PL"
   },
   {
-    "id": 1283710,
-    "name": "Bāgmatī Zone",
-    "country": "NP"
+    "id": 6542283,
+    "name": "Milan",
+    "country": "IT"
+  },
+  {
+    "id": 5809844,
+    "name": "Seattle",
+    "country": "US"
+  },
+  {
+    "id": 5332921,
+    "name": "California",
+    "country": "US"
+  },
+  {
+    "id": 5391811,
+    "name": "San Diego",
+    "country": "US"
+  },
+  {
+    "id": 5506956,
+    "name": "Las Vegas",
+    "country": "US"
+  },
+  {
+    "id": 293397,
+    "name": "Tel Aviv",
+    "country": "IL"
   }
 ]

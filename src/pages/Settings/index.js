@@ -1,31 +1,80 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { SettingItem } from '../../components/SettingItem';
+import Card from '../../components/Card';
+import { Button } from '../../components/Button';
+import { Title } from '../../components/Title';
+import { RadioButton } from '../../components/RadioButton';
+import { Icon } from 'antd';
+import { setTempUnits } from '../../actions';
 import './style.css';
 
-class Settings extends Component {
-  componentDidMount() {
-    console.log(this.props.weatherInfo);
-  }
+const Settings = props => {
+  const mapHistoty = props.gameLog.map(item => ({
+    cities: item.cityIds.map(id => props.cityWeather.get(id)),
+    isWon: item.isWon
+  }));
+  return (
+    <div>
+      <Button text="Back" handleClick={() => props.history.goBack()} />
+      <Title text="Settings" />
 
-  render() {
-    if (!this.props.weatherInfo.weatherInfo) return null;
-    return (
-      <div className="settings-container">
-        <ul className="settings-wrapper">
-          {this.props.weatherInfo.weatherInfo.map(item => (
-            <li key={item.id} className="setting-list-item">
-              <SettingItem name={item.name} />
-            </li>
-          ))}
+      <div>
+        <Title text="Units" />
+        <RadioButton
+          type="celsius"
+          handleChange={props.setTempUnits}
+          checked={props.tempUnits === 'celsius'}
+        />
+        <RadioButton
+          type="fahrenheit"
+          handleChange={props.setTempUnits}
+          checked={props.tempUnits === 'fahrenheit'}
+        />
+      </div>
+      <div>
+        <Title text="Histoty" />
+        <ul>
+          {mapHistoty.map((item, i) => {
+            const [firstCard, secendCard] = item.cities;
+            return (
+              <div key={i} className="card-list">
+                <Card
+                  city={firstCard.name}
+                  country={firstCard.country}
+                  id={firstCard.id}
+                  temp={firstCard.temp}
+                  showTemp={true}
+                />
+                <Card
+                  city={secendCard.name}
+                  country={secendCard.country}
+                  id={secendCard.id}
+                  temp={secendCard.temp}
+                  showTemp={true}
+                />
+                <div>
+                  <Icon style={{ fontSize: 60 }} type={item.isWon ? 'check' : 'close'} />
+                </div>
+              </div>
+            );
+          })}
         </ul>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-const mapStateToProps = ({ weatherInfo }) => ({
-  weatherInfo
+const mapStateToProps = ({ cityWeather, gameLog, tempUnits }) => ({
+  cityWeather,
+  gameLog,
+  tempUnits
 });
 
-export default connect(mapStateToProps)(Settings);
+const mapDispatchToProps = dispatch => ({
+  setTempUnits: tempUnits => dispatch(setTempUnits(tempUnits))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Settings);
