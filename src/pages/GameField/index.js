@@ -87,7 +87,11 @@ class GameField extends Component {
             handleClick={this.selectCard}
           />
         </div>
-        {isCardSelected && <Button text="Next cities" handleClick={this.nextCards} />}
+        {isCardSelected && (
+          <div className="button-wrapper">
+            <Button text="Next cities" handleClick={this.nextCards} />
+          </div>
+        )}
       </div>
     );
   }

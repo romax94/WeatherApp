@@ -16,7 +16,6 @@ const Settings = props => {
     <div>
       <Button text="Back" handleClick={() => props.history.goBack()} />
       <Title text="Settings" />
-
       <div>
         <Title text="Units" />
         <RadioButton
@@ -31,7 +30,7 @@ const Settings = props => {
         />
       </div>
       <div>
-        <Title text="Histoty" />
+        {mapHistoty.length !== 0 && <Title text="History" />}
         <ul>
           {mapHistoty.map((item, i) => {
             const [firstCard, secendCard] = item.cities;
