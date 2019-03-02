@@ -6,7 +6,6 @@ import { Title } from '../../components/Title';
 import { RadioButton } from '../../components/RadioButton';
 import { Icon } from 'antd';
 import { setTempUnits } from '../../actions';
-import './style.css';
 
 const Settings = props => {
   const mapHistoty = props.gameLog.map(item => ({
